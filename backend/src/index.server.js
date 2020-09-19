@@ -3,13 +3,15 @@ const env = require("dotenv");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const userRouter = require("./routes/user");
+
+//Routes
+const authRouter = require("./routes/auth");
+const adminRouter = require("./routes/admin/auth");
 
 //Environment variable
 env.config();
 
 //mongodb connection
-// mongodb+srv://root:<password>@@cluster0.tqxgi.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 mongoose
     .connect(
@@ -18,7 +20,8 @@ mongoose
     .then(() => console.log("Database connected successfully"));
 
 app.use(bodyParser.json());
-app.use("/api", userRouter);
+app.use("/api", authRouter);
+app.use("/api", adminRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`server is running on ${process.env.PORT}`);
