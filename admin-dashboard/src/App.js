@@ -1,13 +1,20 @@
 import React from "react";
-import { Jumbotron } from "react-bootstrap";
 import "./App.css";
-
+import Layout from "./components/Layout";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./containers/Home";
+import Signup from "./containers/Signup";
+import Signin from "./containers/Signin";
 function App() {
   return (
     <div className="App">
-      <Jumbotron className="text-center">
-        <h1>Admin Dashboard</h1>
-      </Jumbotron>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/signin" component={Signin} />
+          <Route exact path="/signup" component={Signup} />
+        </Switch>
+      </Router>
     </div>
   );
 }
