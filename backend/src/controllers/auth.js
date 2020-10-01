@@ -33,18 +33,19 @@ exports.signin = (req, res) => {
     if (err) return res.status(400).json({ err });
     if (user) {
       if (user.authenticate(req.body.password)) {
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
         const {
           _id,
           firstName,
           lastName,
           username,
           email,
+          role,
           password,
           fullName,
         } = user;
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-          expiresIn: "1h",
-        });
         res.status(200).json({
           token,
           user: {
@@ -53,6 +54,7 @@ exports.signin = (req, res) => {
             lastName,
             username,
             email,
+            role,
             password,
             fullName,
           },
