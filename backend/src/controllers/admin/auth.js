@@ -32,7 +32,6 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
   User.findOne({ email: req.body.email }).exec((err, user) => {
     if (err) return res.status(400).json({ err });
-    console.log(user);
     if (user) {
       if (user.authenticate(req.body.password) && user.role === "admin") {
         const {

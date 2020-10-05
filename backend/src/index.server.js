@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
 const adminRouter = require("./routes/admin/auth");
 const categoryRoute = require("./routes/category");
+const productRoute = require("./routes/product");
 //Environment variable
 env.config();
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use("/api", authRouter);
 app.use("/api", adminRouter);
 app.use("/api", categoryRoute);
+app.use("/api", productRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`server is running on ${process.env.PORT}`);
